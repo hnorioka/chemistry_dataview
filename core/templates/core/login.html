@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+
+
+
+{% block content %}
+    <main class="container-principal">
+        <div class="enfeite-login"></div>
+        <section class="caixa-login">
+            <form class="form-login" method="POST" action="/login/">
+                {% csrf_token %}
+                <div class="form-login-titulo">
+                    <h1>Login</h1>
+                    
+                </div>
+                <div class="campo-login">
+                    <div class="campo-input">
+                        <label for="input-usuario">
+                            Usuário:
+                        </label>
+                        <input class='input' type="text" id="input-usuario" name="username">
+                    </div>
+                    <div class="campo-input">
+                       <label for="input-senha">
+                            Senha:
+                       </label>
+                        <input class='input' type="password" id="input-senha" name="password">
+                    </div>
+                </div>
+                <div class="campo-botao">
+
+                    <button type="submit">Enviar</button>
+                    
+                </div>
+                <div class="campo-aviso">
+                    {% if erro %}
+                        <p>{{erro}}</p>
+                    {% endif %}
+                </div>
+  
+            </form>
+
+        </section>
+        <section class="caixa-login-img">
+            <img src="../../static/core/Images/login.svg" alt="">
+
+        </section>
+    </main>
+{% endblock %}

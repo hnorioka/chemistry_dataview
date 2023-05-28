@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lembra de mudar</title>
+    <link rel="stylesheet" href="{% static 'core/base.css' %}">
+    <link rel="stylesheet" href="{% static 'core/index.css' %}">
+    <link rel="stylesheet" href="{% static 'core/login.css' %}">
+    <link rel="stylesheet" href="{% static 'core/cadastro.css' %}">
+</head>
+<body>
+    <header id="container-header">
+        <div class="container-header-logo">
+            <h2>Química</h2>
+        </div>
+        {% block navbar %}
+        <nav class="container-header-nav">
+            <a class="nav-link" href="{% url 'index' %}">Inicio</a>
+            {% if not user.is_authenticated %}
+                <a  class="nav-link" href="{% url 'login' %}">Login</a>
+                <a class="nav-link" href="{% url 'cadastro' %}">Cadastro</a>
+            {% else %}
+            
+            <a href="{% url 'dashboard' %}" class="nav-link">Dashboard</a>
+            <a href="{% url 'logout' %}" class="nav-link">Desconectar</a>
+            {% endif %}
+        </nav>
+        {% endblock navbar %}
+    </header>
+
+    {% block content %}
+
+    {% endblock content  %}
+</body>
+</html>

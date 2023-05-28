@@ -1,0 +1,53 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <main class="container-principal">
+        <div class="enfeite-cadastro"></div>
+        <section class="caixa-cadastro">
+            <form class="form-cadastro" method="POST" action="/cadastro/">
+                {% csrf_token %}
+                <div class="form-cadastro-titulo">
+                    <h1>cadastro</h1>
+                    
+                </div>
+                <div class="campo-cadastro">
+                    <div class="campo-input">
+                        <label for="input-usuario">
+                            Usuário:
+                        </label>
+                        <input class='input' type="text" id="input-usuario" name="username">
+                    </div>
+                    <div class="campo-input">
+                       <label for="input-senha">
+                            Senha:
+                       </label>
+                        <input class='input' type="password" id="input-senha" name="password">
+                    </div>
+                    <div class="campo-input">
+                        <label for="input-confirmar-senha">
+                             Confirmar senha:
+                        </label>
+                         <input class='input' type="password" id="input-confirmar-senha" name="confirmar_password">
+                     </div>
+                </div>
+                <div class="campo-botao">
+
+                    <button type="submit">Enviar</button>
+                    
+                </div>
+                <div class="campo-aviso">
+                    {% if erro %}
+                        <p>{{erro}}</p>
+                    {% endif %}
+                </div>
+            </form>
+
+        </section>
+        <section class="caixa-cadastro-img">
+            <img src="{% static 'core/Images/login.svg' %}" alt="">
+
+        </section>
+    </main>
+{% endblock %}
