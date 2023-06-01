@@ -74,7 +74,8 @@ def cadastro(request):
 
     
 def dashboard(request):
-    return render(request, 'core/dashboard.html')
+    experimentos = Experimento.objects.all()
+    return render(request, 'core/dashboard.html',{'experimentos':experimentos})
 
 def cadastrar_experimento(request):
     if request.method == 'POST':
@@ -88,14 +89,27 @@ def cadastrar_experimento(request):
     
     return HttpResponse('Método não permitido.')
 
+def deletar_experimento(request):
+    if request.method == 'POST':
+        nome = request.POST.get('nome')
+        user = request.user
+        experimento = Experimento.objects.filter(nome=nome)
+
+        experimento.delete()
+        
+        return redirect()
+    
 def cadastrar_amostra(request):
     if request.method == 'POST':
-        valor = int(request.POST.get('valor'))
-        id_experimento = request.POST.get('id_experimento')
-        experimento = Experimento.objects.get(id=id_experimento)
-        amosta = Amostra(valor=valor)
+        temperatura = float(request.POST.get('temperatura'))
+        concentracao = float(request.POST.get('concentracao'))
+        nome_experimento = request.POST.get('nome_experimento')
 
-        experimento.amostras.add(amosta)
+        experimento = Experimento.objects.get(nome=nome_experimento )
+        amostra = Amostra(temperatura,temperatura=temperatura, concentracao=concentracao)
+        amostra.save()
+        experimento.amostras.add(amostra)
+        experimento.save()
 
         return redirect('dashboard')
 
