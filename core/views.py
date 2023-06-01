@@ -114,3 +114,14 @@ def cadastrar_amostra(request):
         return redirect('dashboard')
 
 
+def deletar_amostra(request):
+    if request.method == 'POST':
+        id_amostra = int(request.POST.get('id'))
+
+        amostra = Amostra.objects.get(id = id_amostra)
+
+        amostra.delete()
+
+        amostra.save()
+
+        return redirect('dashboard')

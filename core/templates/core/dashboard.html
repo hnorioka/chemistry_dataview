@@ -1,6 +1,18 @@
 {% extends 'core/base.html' %}
 {% block content %}
-    {% for experimento in experimentos %}
+    <main class="container-dashboard">
+        <section class="container-dashboard-barra">
+            <span class="material-symbols-outlined">
+                add
+            </span>
+            <p>ADICIONAR FORMULA</p>
+            <span class="material-symbols-outlined">
+                library_add
+            </span>
+
+        </section>
+    </main>
+    <!--{% for experimento in experimentos %}
         <p>{{experimento.nome}}</p>
     {% endfor %}
 
@@ -23,4 +35,5 @@
         <input type="number" name="concentracao" placeholder="Concentração" id="">
         <input type="submit" value="Cadastrar amostra">
     </form>
+    -->
 {% endblock %}
