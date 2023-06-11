@@ -1,0 +1,38 @@
+{% extends 'core/base.html' %}
+
+
+{% block content %}
+<canvas id="visualizacao-experimento"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.0/dist/chart.umd.js"></script>
+<script>
+    (async function() {
+        const data = [
+      {% for amostra in experimento.amostras.all %} 
+            {concentracao: {{amostra.concentracao}}, temperatura: {{amostra.temperatura}}},
+      {% endfor %}
+   
+  ];
+
+  new Chart(
+    document.getElementById('visualizacao-experimento'),
+    {
+      type: 'line',
+      data: {
+        labels: data.map(row => row.concentracao),
+        datasets: [
+          {
+            label: 'Temperatura °C',
+            data: data.map(row => row.temperatura)
+          }
+        ]
+      }
+    }
+  );
+})();
+ 
+</script>
+
+
+
+
+{% endblock %}

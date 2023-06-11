@@ -125,3 +125,14 @@ def deletar_amostra(request):
         amostra.save()
 
         return redirect('dashboard')
+
+def visualizar_experimento(request, id_experimento):
+
+    experimento = Experimento.objects.get(id=id_experimento)
+    
+    amostras = experimento.amostras.all()
+
+    for amostra in amostras:
+        print(amostra)
+
+    return render(request, 'core/visualizar-experimento.html',{'experimento':experimento})
