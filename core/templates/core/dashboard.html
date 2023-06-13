@@ -1,39 +1,62 @@
 {% extends 'core/base.html' %}
 {% block content %}
     <main class="container-dashboard">
+        <div class="modal">
+            <form action="{% url 'cadastrar-experimento' %}" method="post">
+                {% csrf_token %}
+                <span class="close-modal">x</span>
+                <div class='form-titulo'>
+                    <h4>Cadastrar experiemento</h4>
+                </div>
+                <div class="form-input">
+                    <input type="text" name="nome" id="" placeholder="nome">
+                </div>
+                <div class="form-input">
+                    <input type="submit" value="cadastrar">
+                </div>
+            </form>
+        </div>
+        <div class="modal">
+            <form action="{% url 'deletar-experimento' %}" method="post">
+                <span class="close-modal">x</span>
+                {% csrf_token %}
+                <div class='form-titulo'>
+                    <h4>Deletar experiemento</h4>
+                </div>
+                <div class="form-input">
+                    <input type="text" name="nome" id="" placeholder="nome">
+                </div>
+                <div class="form-input">
+                    <input type="submit" value="deletar">
+                </div>
+            </form>
+        </div>
         <section class="container-dashboard-barra">
-            <span class="material-symbols-outlined">
-                add
-            </span>
-            <p>ADICIONAR FORMULA</p>
-            <span class="material-symbols-outlined">
-                library_add
-            </span>
-
+            <div class="button-open-modal">
+                <div class="simbolo">
+                    <span class="material-symbols-outlined">
+                        add
+                    </span>
+                </div>
+                <div class="titulo">
+                    <p>Adicionar experimento</p>
+                </div>
+            </div>
+            <div class="button-open-modal">
+                <div class="simbolo">
+                    <span class="material-symbols-outlined">
+                        delete
+                    </span>
+                </div>
+                <div class="titulo">
+                    <p>Deletar experimento</p>
+                </div>
+            </div>
+        </section>
+        <section class="container-dashboard-experimentos">
+            {% for experimento in experimentos %}
+                <a href="/visualizar-experimento/{{experimento.id}}">{{experimento.nome}}</a>
+            {% endfor %}
         </section>
     </main>
-    <!--{% for experimento in experimentos %}
-        <p>{{experimento.nome}}</p>
-    {% endfor %}
-
-    <form action="{% url 'cadastrar-experimento' %}" method="post">
-        {% csrf_token %}
-        <input type="text" name="nome" id="" placeholder="nome">
-        <input type="submit" value="cadastrar">
-    </form>
-
-    <form action="{% url 'cadastrar-amostra' %}" method="post">
-        {% csrf_token %}
-        <select name="nome_experimento" id="">
-            
-            {% for experimento in experimentos %}
-            <option value="{{experimento.nome}}">{{experimento.nome}}</option>
-            
-            {% endfor %}
-        </select>
-        <input type="number" name="temperatura" placeholder="Temperatura" id="">
-        <input type="number" name="concentracao" placeholder="Concentração" id="">
-        <input type="submit" value="Cadastrar amostra">
-    </form>
-    -->
 {% endblock %}
