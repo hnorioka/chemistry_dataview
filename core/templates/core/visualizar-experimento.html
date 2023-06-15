@@ -2,35 +2,50 @@
 
 
 {% block content %}
-<div class="container-grafico">
-  <canvas id="visualizacao-experimento"></canvas>
-  <div class="caixa-visualizar">
-    <div class="simbolo">
-        <span class="material-symbols-outlined">
-            add
-        </span>
+<main class="container-grafico">
+
+  <div class="container-grafico-box">
+    <canvas id="visualizacao-experimento"></canvas>
+  </div>
+
+  <div class="container-grafico-funcoes">
+    
+    <div class="caixa-visualizar">
+      <div class="simbolo">
+          <span class="material-symbols-outlined">
+              add
+          </span>
+      </div>
+      <div class="titulo">
+          <p>Adicionar amostra</p>
+      </div>
     </div>
-    <div class="titulo">
-        <p>Adicionar amostra</p>
+
+    <div class="caixa-visualizar">
+      <div class="simbolo">
+          <span class="material-symbols-outlined">
+              delete
+          </span>
+        </div>
+        <div class="titulo">
+          <p>Deletar amostra</p>
+        </div>
     </div>
-    <div class="simbolo">
-      <span class="material-symbols-outlined">
-          delete
-      </span>
-    </div>
-    <div class="titulo">
-      <p>Deletar amostra</p>
-    </div>
-    <div class="simbolo">
-      <span class="material-symbols-outlined">
-          edit
-      </span>
-    </div>
-    <div class="titulo">
-        <p>Editar amostra</p>
-    </div>
-</div>
-</div>
+  
+    <div class="caixa-visualizar">
+      <div class="simbolo">
+          <span class="material-symbols-outlined">
+              edit
+          </span>
+      </div>
+        <div class="titulo">
+            <p>Editar amostra</p>
+        </div>
+    </div>  
+    
+  </div>
+  
+</main>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.0/dist/chart.umd.js"></script>
 <script>
     (async function() {

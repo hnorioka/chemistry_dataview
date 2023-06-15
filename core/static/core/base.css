@@ -47,22 +47,6 @@ body{
     border-bottom: 0.2rem solid #fff;
 }
 
-.container-grafico{
-    width: 50%;
-    height: 50%;
-    margin: 10vh auto;
-}
-
-.caixa-visualizar{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 80%;
-    height: 5%;
-    margin: 5% 0;
-    cursor: pointer;
-}
-
 @media screen and (max-width:1024px) {
 
     .container-header-nav a{
