@@ -4,7 +4,11 @@
         <div class="modal">
             <form action="{% url 'cadastrar-experimento' %}" method="post">
                 {% csrf_token %}
-                <span class="close-modal">x</span>
+                <div class="form-voltar">
+                    <span class="material-symbols-outlined close-modal">
+                        undo
+                    </span>
+                </div>
                 <div class='form-titulo'>
                     <h4>Cadastrar experiemento</h4>
                 </div>
@@ -12,13 +16,17 @@
                     <input type="text" name="nome" id="" placeholder="nome">
                 </div>
                 <div class="form-input">
-                    <input type="submit" value="cadastrar">
+                    <input class="botao-funcional" type="submit" value="cadastrar">
                 </div>
             </form>
         </div>
         <div class="modal">
             <form action="{% url 'deletar-experimento' %}" method="post">
-                <span class="close-modal">x</span>
+                <div class="form-voltar">
+                    <span class="material-symbols-outlined close-modal">
+                        undo
+                    </span>
+                </div>
                 {% csrf_token %}
                 <div class='form-titulo'>
                     <h4>Deletar experiemento</h4>
@@ -27,7 +35,7 @@
                     <input type="text" name="nome" id="" placeholder="nome">
                 </div>
                 <div class="form-input">
-                    <input type="submit" value="deletar">
+                    <input class="botao-funcional" type="submit" value="deletar">
                 </div>
             </form>
         </div>
@@ -54,9 +62,24 @@
             </div>
         </section>
         <section class="container-dashboard-experimentos">
-            {% for experimento in experimentos %}
-                <a href="/visualizar-experimento/{{experimento.id}}">{{experimento.nome}}</a>
-            {% endfor %}
+            <div class="container-dashboard-experimentos-titulo">
+                <h2>Experimentos</h2>
+            </div>
+            <div class="container-dashboard-experimentos-itens">
+                {% for experimento in experimentos %}
+                    <div class="container-dashboard-experimentos-itens-caixa">
+                        <div>
+                            <p>{{experimento.nome}}</p>
+                            <span class="material-symbols-outlined">
+                                science
+                            </span>
+                        </div>
+                        <div>
+                            <a href="/visualizar-experimento/{{experimento.id}}">Visualizar gráfico</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </section>
     </main>
 {% endblock %}

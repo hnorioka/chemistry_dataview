@@ -3,7 +3,63 @@
 
 {% block content %}
 <main class="container-grafico">
-
+  <div class="modal-grafico">
+    <form action="{% url 'cadastrar-experimento' %}" method="post">
+        {% csrf_token %}
+        <div class="form-voltar">
+            <span class="material-symbols-outlined close-modal">
+                undo
+            </span>
+        </div>
+        <div class='form-titulo'>
+            <h4>Adicionar amostra</h4>
+        </div>
+        <div class="form-input">
+            <input type="text" name="nome" id="" placeholder="nome">
+        </div>
+        <div class="form-input">
+            <input class="botao-funcional" type="submit" value="Adicionar">
+        </div>
+    </form>
+  </div>
+  <div class="modal-grafico">
+    <form action="{% url 'cadastrar-experimento' %}" method="post">
+        {% csrf_token %}
+        <div class="form-voltar">
+            <span class="material-symbols-outlined close-modal">
+                undo
+            </span>
+        </div>
+        <div class='form-titulo'>
+            <h4>Deletar amostra</h4>
+        </div>
+        <div class="form-input">
+            <input type="text" name="nome" id="" placeholder="nome">
+        </div>
+        <div class="form-input">
+            <input class="botao-funcional" type="submit" value="Deletar">
+        </div>
+    </form>
+  </div>
+  <div class="modal-grafico">
+    <form action="{% url 'cadastrar-experimento' %}" method="post">
+        {% csrf_token %}
+        <div class="form-voltar">
+            <span class="material-symbols-outlined close-modal">
+                undo
+            </span>
+        </div>
+        <div class='form-titulo'>
+            <h4>Editar amostra</h4>
+        </div>
+        <div class="form-input">
+            <input type="text" name="nome" id="" placeholder="nome">
+        </div>
+        <div class="form-input">
+            <input class="botao-funcional" type="submit" value="Editar">
+        </div>
+    </form>
+  </div>
   <div class="container-grafico-box">
     <canvas id="visualizacao-experimento"></canvas>
   </div>
@@ -42,7 +98,7 @@
             <p>Editar amostra</p>
         </div>
     </div>  
-    
+ 
   </div>
   
 </main>

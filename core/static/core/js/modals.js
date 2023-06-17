@@ -2,6 +2,9 @@ window.onload = ()=>{
     
     const btns = document.querySelectorAll('.button-open-modal')
     const modals = document.querySelectorAll('.modal')
+    const modalsGraficos = document.querySelectorAll('.modal-grafico')
+    const btnsGraficos = document.querySelectorAll('.caixa-visualizar')
+    console.log(btnsGraficos)
     const closeModal = document.querySelectorAll('.close-modal')
 
     btns.forEach((item, index) =>{
@@ -30,7 +33,36 @@ window.onload = ()=>{
 
     closeModal.forEach((item, index) =>{
         item.addEventListener('click', () => {
-            modals[index].classList.remove('ativo')
+            if(modals.length !== 0){
+                modals[index].classList.remove('ativo')
+            }
+
+            if(modalsGraficos.length !== 0){
+                modalsGraficos[index].classList.remove('ativo')
+            }
+            
+            
+        })
+    })
+
+    btnsGraficos.forEach((item, index) =>{
+        item.addEventListener('click', () => {
+
+            const adicionarAmostraModalIndex = 0;
+            const deletarAmostraModalIndex = 1;   
+            const editarAmostraModalIndex = 2    
+
+            if(index === adicionarAmostraModalIndex){
+                modalsGraficos[index].classList.add('ativo')
+            }
+
+            if(index === deletarAmostraModalIndex){
+                modalsGraficos[index].classList.add('ativo')
+            }
+
+            if(index === editarAmostraModalIndex){
+                modalsGraficos[index].classList.add('ativo')
+            }
         })
     })
 

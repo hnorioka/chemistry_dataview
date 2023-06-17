@@ -49,8 +49,6 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: #000;
-    opacity: 0.5;
     display: none;
     justify-content: center;
     align-items: center;
@@ -66,15 +64,30 @@
     background-color: #fff;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
     border-radius: 1rem;
+    
 }
-
+.form-voltar{
+    width: 80%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+.form-voltar span{
+    cursor: pointer;
+    background-color:red;
+    border-radius: 10px;
+    color: #fff;
+    padding: 5px;
+}
 .form-titulo{
     width: 100%;
-    height: 30%;
+    height: 20%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 
 .form-input{
     display: flex;
@@ -84,9 +97,64 @@
     height: 20%;
 }
 
+.form-input input{
+    width: 70%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #000;
+    background-color: #fff;
+
+}
+
+.form-input .botao-funcional{
+    width: 50%;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #00FA9A;
+    border: none;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
 .container-dashboard-experimentos{
     width: 85%;
     height: 100%;
     display: flex;
+    align-items: center;
     flex-direction: column;
+}
+
+.container-dashboard-experimentos-titulo{
+    width: 80%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+}
+.container-dashboard-experimentos-itens{
+    width: 80%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+.container-dashboard-experimentos-itens-caixa{
+    width: 80%;
+    height: 10%;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 2px solid #000;
+}
+
+.container-dashboard-experimentos-itens-caixa p {
+    color: #000;
+}
+
+.container-dashboard-experimentos-itens-caixa div{
+    height: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.container-dashboard-experimentos-itens-caixa div a {
+    font-size: 15px;
 }

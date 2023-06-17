@@ -1,6 +1,7 @@
 .container-grafico{
     width: 100%;
     height: 90vh;
+    position: relative;
 }
 
 .caixa-visualizar{
@@ -12,6 +13,8 @@
     margin: 5% 0;
     padding-bottom: 1%;
     cursor: pointer;
+    text-decoration: none;
+    color: #000;
 }
 
 .container-grafico-box{
@@ -33,4 +36,25 @@
 
 .caixa-visualizar:hover{
     border-bottom: 2px solid #000;
+}
+
+.modal-grafico{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-grafico.ativo{
+    display: flex;
+}
+.modal-grafico form{
+    width: 30%;
+    height: 60%;
+    background-color: #fff;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    border-radius: 1rem;
+    
 }
