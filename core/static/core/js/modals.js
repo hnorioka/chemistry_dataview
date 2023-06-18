@@ -66,5 +66,67 @@ window.onload = ()=>{
         })
     })
 
+
+    //dynamic select
+    const select  = document.querySelector('#select-editar-amostra');
+    console.log(select)
+    select.addEventListener('change',()=>{
+        const selectData = (getSelectTemperatureAndConcentration())
+
+        const inputEditarConcentracao = document.querySelector('#editar-concentracao')
+        const inputEditarTemperatura = document.querySelector('#editar-temperatura')
+
+        inputEditarConcentracao.value = selectData.concentration;
+        inputEditarTemperatura.value = selectData.temperature;
+    })
+
+function getTemperatureOfOption(optionText){
+    const texto = optionText;
+    const padrao = /Temperatura: ([\d.]+)/;
+    const resultado = texto.match(padrao);
+
+    if (resultado && resultado.length > 1) {
+      const temperatura = resultado[1];
+    return temperatura
+    } else {
+    console.log("Temperatura não encontrada");
+    }
+
+}  
+
+function getConcentrationOfoption(optionText){
+    const texto = optionText;
+    const padrao = /Concentração: ([\d.]+)/;
+    const resultado = texto.match(padrao);
+
+    if (resultado && resultado.length > 1) {
+        const concentracao = resultado[1];
+        return concentracao
+    } else {
+    console.log("Concentração não encontrada");
+}
+
+}
+
+function getSelectTemperatureAndConcentration(){
+    const select  = document.querySelector('#select-editar-amostra');
+    
+    let options = select.options;
+
+    for (let i = 0; i < options.length; i++) {
+        const element = options[i];
+        if(element.selected){
+            
+           const temperature = getTemperatureOfOption(element.text);
+           const concentration = getConcentrationOfoption(element.text)
+
+           return {
+            temperature,
+            concentration
+           }
+           console.log(temperature, concentration)
+        }
+    }
+}
     
 }

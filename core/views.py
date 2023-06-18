@@ -103,28 +103,44 @@ def cadastrar_amostra(request):
     if request.method == 'POST':
         temperatura = float(request.POST.get('temperatura'))
         concentracao = float(request.POST.get('concentracao'))
-        nome_experimento = request.POST.get('nome_experimento')
+        id_experimento = request.POST.get('id_experimento')
 
-        experimento = Experimento.objects.get(nome=nome_experimento )
+        experimento = Experimento.objects.get(id=id_experimento )
         amostra = Amostra(temperatura,temperatura=temperatura, concentracao=concentracao)
         amostra.save()
         experimento.amostras.add(amostra)
         experimento.save()
 
-        return redirect('dashboard')
+        return redirect(f'/visualizar-experimento/{id_experimento}')
 
 
 def deletar_amostra(request):
     if request.method == 'POST':
-        id_amostra = int(request.POST.get('id'))
-
+        id_amostra = int(request.POST.get('id_amostra'))
+        id_experimento = int(request.POST.get('id_experimento'))
         amostra = Amostra.objects.get(id = id_amostra)
 
         amostra.delete()
 
         amostra.save()
 
-        return redirect('dashboard')
+        return redirect(f'/visualizar-experimento/{id_experimento}')
+    
+def editar_amostra(request):
+    if request.method == 'POST':
+        id_amostra = int(request.POST.get('id_amostra'))
+        id_experimento = int(request.POST.get('id_experimento'))
+        temperatura = float(request.POST.get('temperatura'))
+        concentracao = float(request.POST.get('concentracao'))
+
+        amostra = Amostra.objects.get(id = id_amostra)
+
+        amostra.concentracao = concentracao
+        amostra.temperatura = temperatura
+
+        amostra.save()
+
+        return redirect(f'/visualizar-experimento/{id_experimento}')
 
 def visualizar_experimento(request, id_experimento):
 

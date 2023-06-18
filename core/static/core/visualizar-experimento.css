@@ -58,3 +58,20 @@
     border-radius: 1rem;
     
 }
+
+
+#editar-amostra-form{
+    width: 60vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+}
+
+#editar-amostra-form .form-input>    #input-editar-temperatura,#input-editar-concentracao{
+    margin: 0 auto;
+
+    width: 60%;
+}

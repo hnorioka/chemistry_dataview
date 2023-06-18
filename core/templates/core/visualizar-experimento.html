@@ -1,10 +1,11 @@
 {% extends 'core/base.html' %}
-
+{% load static %}
 
 {% block content %}
+<script src="{% static 'core/js/visualizar-experimento.js' %}"></script>
 <main class="container-grafico">
   <div class="modal-grafico">
-    <form action="{% url 'cadastrar-experimento' %}" method="post">
+    <form action="{% url 'cadastrar-amostra' %}" method="post">
       {% csrf_token %}
       <div class="form-voltar">
         <span class="material-symbols-outlined close-modal">
@@ -15,7 +16,13 @@
         <h4>Adicionar amostra</h4>
       </div>
       <div class="form-input">
-        <input type="text" name="nome" id="" placeholder="nome">
+        <input type="number" name="temperatura" id="" placeholder="Temperatura">
+      </div>
+      <div class="form-input">
+        <input type="number" name="concentracao" id="" placeholder="Concentração">
+      </div>
+      <div class="form-input" style="display: none;">
+        <input type="number" name="id_experimento" id="" value="{{experimento.id}}" placeholder="Temperatura">
       </div>
       <div class="form-input">
         <input class="botao-funcional" type="submit" value="Adicionar">
@@ -23,7 +30,7 @@
     </form>
   </div>
   <div class="modal-grafico">
-    <form action="{% url 'cadastrar-experimento' %}" method="post">
+    <form action="{% url 'deletar-amostra' %}" method="post">
       {% csrf_token %}
       <div class="form-voltar">
         <span class="material-symbols-outlined close-modal">
@@ -33,8 +40,15 @@
       <div class='form-titulo'>
         <h4>Deletar amostra</h4>
       </div>
+      <div class="form-input" style="display:none;">
+        <input type="text"  name="id_experimento" value="{{experimento.id}}"" id="">
+      </div>
       <div class="form-input">
-        <input type="text" name="nome" id="" placeholder="nome">
+       <select name="id_amostra" id="">
+        {% for amostra in experimento.amostras.all %}
+          <option value="{{amostra.id}}">Temperatura: {{amostra.temperatura}} Concentração: {{amostra.concentracao}}</option>
+        {% endfor %}
+       </select>
       </div>
       <div class="form-input">
         <input class="botao-funcional" type="submit" value="Deletar">
@@ -42,7 +56,7 @@
     </form>
   </div>
   <div class="modal-grafico">
-    <form action="{% url 'cadastrar-experimento' %}" method="post">
+    <form action="{% url 'editar-amostra' %}" method="post" id="editar-amostra-form">
       {% csrf_token %}
       <div class="form-voltar">
         <span class="material-symbols-outlined close-modal">
@@ -53,8 +67,25 @@
         <h4>Editar amostra</h4>
       </div>
       <div class="form-input">
-        <input type="text" name="nome" id="" placeholder="nome">
+        <select name="id_amostra" id="select-editar-amostra">
+          {% for amostra in experimento.amostras.all %}
+          <option value="{{amostra.id}}">Temperatura: {{amostra.temperatura}} Concentração: {{amostra.concentracao}}</option>
+          {% endfor %}
+        </select>
       </div>
+
+        <div class="form-input">
+          <label for="editar-temperatura">Temperatura:</label>
+          <input type="number" name="temperatura" id="editar-temperatura" value="{{experimento.amostras.all.0.temperatura}}" placeholder="Temperatura" >
+        </div>
+        
+        <div class="form-input">
+          <label for="editar-concentracao">Concentracao:</label>
+
+          <input type="number" name="concentracao" id="editar-concentracao" value="{{experimento.amostras.all.0.concentracao}}" placeholder="Concentração">
+        </div>
+        <input type="number" name="id_experimento" id="" value="{{experimento.id}}" style="display: none;">
+      
       <div class="form-input">
         <input class="botao-funcional" type="submit" value="Editar">
       </div>
@@ -111,13 +142,14 @@
 // Dados do gráfico
 var data = {
   datasets: [{
-    label: 'Temperatura por concentração',
+    label: 'Temperatura por concentração  ',
     data: [
      {% for amostra in experimento.amostras.all %}
       {x:{{amostra.concentracao}}, y: {{amostra.temperatura}}},
      {% endfor %}
     ],
-    borderColor: 'cyan',
+    borderColor: 'red',
+    backgroundColor: 'rgb(255, 0, 0)',
     fill: false
   }]
 };
@@ -133,12 +165,14 @@ var options = {
     x: {
       type: 'linear',
       position: 'bottom',
+      beginAtZero:true,
       scaleLabel: {
         display: true,
         labelString: 'Concentração'
       }
     },
     y: {
+      beginAtZero:true,
       ticks: {
         beginAtZero: true
       },
@@ -153,7 +187,7 @@ var options = {
 // Renderizar o gráfico
 var ctx = document.getElementById('visualizacao-experimento').getContext('2d');
 new Chart(ctx, {
-  type: 'line',
+  type: 'scatter',
   data: data,
   options: options
 });
