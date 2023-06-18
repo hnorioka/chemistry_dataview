@@ -5,59 +5,59 @@
 <main class="container-grafico">
   <div class="modal-grafico">
     <form action="{% url 'cadastrar-experimento' %}" method="post">
-        {% csrf_token %}
-        <div class="form-voltar">
-            <span class="material-symbols-outlined close-modal">
-                undo
-            </span>
-        </div>
-        <div class='form-titulo'>
-            <h4>Adicionar amostra</h4>
-        </div>
-        <div class="form-input">
-            <input type="text" name="nome" id="" placeholder="nome">
-        </div>
-        <div class="form-input">
-            <input class="botao-funcional" type="submit" value="Adicionar">
-        </div>
+      {% csrf_token %}
+      <div class="form-voltar">
+        <span class="material-symbols-outlined close-modal">
+          undo
+        </span>
+      </div>
+      <div class='form-titulo'>
+        <h4>Adicionar amostra</h4>
+      </div>
+      <div class="form-input">
+        <input type="text" name="nome" id="" placeholder="nome">
+      </div>
+      <div class="form-input">
+        <input class="botao-funcional" type="submit" value="Adicionar">
+      </div>
     </form>
   </div>
   <div class="modal-grafico">
     <form action="{% url 'cadastrar-experimento' %}" method="post">
-        {% csrf_token %}
-        <div class="form-voltar">
-            <span class="material-symbols-outlined close-modal">
-                undo
-            </span>
-        </div>
-        <div class='form-titulo'>
-            <h4>Deletar amostra</h4>
-        </div>
-        <div class="form-input">
-            <input type="text" name="nome" id="" placeholder="nome">
-        </div>
-        <div class="form-input">
-            <input class="botao-funcional" type="submit" value="Deletar">
-        </div>
+      {% csrf_token %}
+      <div class="form-voltar">
+        <span class="material-symbols-outlined close-modal">
+          undo
+        </span>
+      </div>
+      <div class='form-titulo'>
+        <h4>Deletar amostra</h4>
+      </div>
+      <div class="form-input">
+        <input type="text" name="nome" id="" placeholder="nome">
+      </div>
+      <div class="form-input">
+        <input class="botao-funcional" type="submit" value="Deletar">
+      </div>
     </form>
   </div>
   <div class="modal-grafico">
     <form action="{% url 'cadastrar-experimento' %}" method="post">
-        {% csrf_token %}
-        <div class="form-voltar">
-            <span class="material-symbols-outlined close-modal">
-                undo
-            </span>
-        </div>
-        <div class='form-titulo'>
-            <h4>Editar amostra</h4>
-        </div>
-        <div class="form-input">
-            <input type="text" name="nome" id="" placeholder="nome">
-        </div>
-        <div class="form-input">
-            <input class="botao-funcional" type="submit" value="Editar">
-        </div>
+      {% csrf_token %}
+      <div class="form-voltar">
+        <span class="material-symbols-outlined close-modal">
+          undo
+        </span>
+      </div>
+      <div class='form-titulo'>
+        <h4>Editar amostra</h4>
+      </div>
+      <div class="form-input">
+        <input type="text" name="nome" id="" placeholder="nome">
+      </div>
+      <div class="form-input">
+        <input class="botao-funcional" type="submit" value="Editar">
+      </div>
     </form>
   </div>
   <div class="container-grafico-box">
@@ -65,70 +65,101 @@
   </div>
 
   <div class="container-grafico-funcoes">
-    
+
     <div class="caixa-visualizar">
       <div class="simbolo">
-          <span class="material-symbols-outlined">
-              add
-          </span>
+        <span class="material-symbols-outlined">
+          add
+        </span>
       </div>
       <div class="titulo">
-          <p>Adicionar amostra</p>
+        <p>Adicionar amostra</p>
       </div>
     </div>
 
     <div class="caixa-visualizar">
       <div class="simbolo">
-          <span class="material-symbols-outlined">
-              delete
-          </span>
-        </div>
-        <div class="titulo">
-          <p>Deletar amostra</p>
-        </div>
+        <span class="material-symbols-outlined">
+          delete
+        </span>
+      </div>
+      <div class="titulo">
+        <p>Deletar amostra</p>
+      </div>
     </div>
-  
+
     <div class="caixa-visualizar">
       <div class="simbolo">
-          <span class="material-symbols-outlined">
-              edit
-          </span>
+        <span class="material-symbols-outlined">
+          edit
+        </span>
       </div>
-        <div class="titulo">
-            <p>Editar amostra</p>
-        </div>
-    </div>  
- 
+      <div class="titulo">
+        <p>Editar amostra</p>
+      </div>
+    </div>
+
   </div>
-  
+
 </main>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.0/dist/chart.umd.js"></script>
 <script>
-    (async function() {
-        const data = [
-      {% for amostra in experimento.amostras.all %} 
-            {concentracao: {{amostra.concentracao}}, temperatura: {{amostra.temperatura}}},
-      {% endfor %}
+  (async function () {
    
-  ];
+ 
+  // Dados do gráfico
+// Dados do gráfico
+var data = {
+  datasets: [{
+    label: 'Temperatura por concentração',
+    data: [
+     {% for amostra in experimento.amostras.all %}
+      {x:{{amostra.concentracao}}, y: {{amostra.temperatura}}},
+     {% endfor %}
+    ],
+    borderColor: 'cyan',
+    fill: false
+  }]
+};
 
-  new Chart(
-    document.getElementById('visualizacao-experimento'),
-    {
-      type: 'line',
-      data: {
-        labels: data.map(row => row.concentracao),
-        datasets: [
-          {
-            label: 'Temperatura °C',
-            data: data.map(row => row.temperatura)
-          }
-        ]
+// Opções do gráfico
+var options = {
+  responsive: true,
+  title: {
+    display: true,
+    text: 'Gráfico de Temperatura vs. Concentração'
+  },
+  scales: {
+    x: {
+      type: 'linear',
+      position: 'bottom',
+      scaleLabel: {
+        display: true,
+        labelString: 'Concentração'
+      }
+    },
+    y: {
+      ticks: {
+        beginAtZero: true
+      },
+      scaleLabel: {
+        display: true,
+        labelString: 'Temperatura'
       }
     }
-  );
-})();
- 
+  }
+};
+
+// Renderizar o gráfico
+var ctx = document.getElementById('visualizacao-experimento').getContext('2d');
+new Chart(ctx, {
+  type: 'line',
+  data: data,
+  options: options
+});
+
+}) ();
+
 </script>
 
 
