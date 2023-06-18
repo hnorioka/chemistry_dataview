@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.utils import timezone
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from .models import DjangoUser, Usuario, Amostra, Experimento
+from .linear_regression_module import *
 # Create your views here.
 
 def index(request):
@@ -103,10 +104,10 @@ def cadastrar_amostra(request):
     if request.method == 'POST':
         temperatura = float(request.POST.get('temperatura'))
         concentracao = float(request.POST.get('concentracao'))
-        id_experimento = request.POST.get('id_experimento')
+        id_experimento = int(request.POST.get('id_experimento'))
 
         experimento = Experimento.objects.get(id=id_experimento )
-        amostra = Amostra(temperatura,temperatura=temperatura, concentracao=concentracao)
+        amostra = Amostra(temperatura=temperatura, concentracao=concentracao)
         amostra.save()
         experimento.amostras.add(amostra)
         experimento.save()
@@ -147,8 +148,29 @@ def visualizar_experimento(request, id_experimento):
     experimento = Experimento.objects.get(id=id_experimento)
     
     amostras = experimento.amostras.all()
+    temperaturas = []
+    concentracoes = []
 
+    for amostra in amostras:
+        temperaturas.append(amostra.temperatura)
+        concentracoes.append(amostra.concentracao)
+
+    erro_grafico = False
+    ###Regrassão linear
+    
+    x = np.array(concentracoes)
+    y = np.array(temperaturas)
+    b = estimate_coef(x, y)
+    coordenadas = get_regression_coordinates(x, y, b)
+    print("Regression coordinates:")
+    for coordenada in coordenadas:
+       print(coordenada)
+
+    if len(coordenadas)<2:
+        erro_grafico = True
+
+    print(f'Erro gráfico? {erro_grafico}')        
     for amostra in amostras:
         print(amostra)
 
-    return render(request, 'core/visualizar-experimento.html',{'experimento':experimento})
+    return render(request, 'core/visualizar-experimento.html',{'experimento':experimento,'coordenadas_regressao':coordenadas, 'erro_grafico':erro_grafico})

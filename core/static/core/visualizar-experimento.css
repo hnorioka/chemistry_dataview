@@ -75,3 +75,10 @@
 
     width: 60%;
 }
+
+#aviso-erro-experimento{
+    color: tomato;
+    text-align: center;
+    margin-bottom: -20vh;
+    margin-top: 10vh;
+}

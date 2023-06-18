@@ -12,7 +12,7 @@ class Amostra(models.Model):
     temperatura = models.FloatField(default=0)
 
     def __str__(self) -> str:
-        return f'Concetração: {self.concentracao} Temperatura: {self.temperatura}'
+        return f'Concentração: {self.concentracao} Temperatura: {self.temperatura}'
 
 class Experimento(models.Model):
     responsavel = models.ForeignKey(DjangoUser, on_delete= models.CASCADE, null=True)

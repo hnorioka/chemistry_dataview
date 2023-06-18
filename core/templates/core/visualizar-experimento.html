@@ -91,9 +91,15 @@
       </div>
     </form>
   </div>
+  {% if erro_grafico %}
+    <h3 id="aviso-erro-experimento">Por favor, adicione pelo menos duas amostras para visualizar o gŕafico</h3>
+    <div class="container-grafico-box">
+    </div>
+  {% else %}
   <div class="container-grafico-box">
     <canvas id="visualizacao-experimento"></canvas>
   </div>
+  {% endif %}
 
   <div class="container-grafico-funcoes">
 
@@ -142,16 +148,28 @@
 // Dados do gráfico
 var data = {
   datasets: [{
-    label: 'Temperatura por concentração  ',
+    label: 'Temperatura vs concentração  ',
     data: [
      {% for amostra in experimento.amostras.all %}
       {x:{{amostra.concentracao}}, y: {{amostra.temperatura}}},
      {% endfor %}
     ],
-    borderColor: 'red',
-    backgroundColor: 'rgb(255, 0, 0)',
+    borderColor: 'blue',
+    backgroundColor: 'aqua',
     fill: false
-  }]
+  },
+  {   
+      label: 'Regressão linear',
+      data: [
+        {% for coordenada in coordenadas_regressao %}
+          { x: {{coordenada.x}}, y: {{coordenada.y}} },
+        {% endfor %}
+       
+      ],
+      borderColor: 'tomato',
+      fill: false,
+      showLine: true // 
+}]
 };
 
 // Opções do gráfico
@@ -187,7 +205,7 @@ var options = {
 // Renderizar o gráfico
 var ctx = document.getElementById('visualizacao-experimento').getContext('2d');
 new Chart(ctx, {
-  type: 'scatter',
+  type:'scatter',
   data: data,
   options: options
 });
