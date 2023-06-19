@@ -75,7 +75,7 @@ def cadastro(request):
 
     
 def dashboard(request):
-    experimentos = Experimento.objects.all()
+    experimentos = Experimento.objects.filter(responsavel= request.user)
     return render(request, 'core/dashboard.html',{'experimentos':experimentos})
 
 def cadastrar_experimento(request):
