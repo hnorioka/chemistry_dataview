@@ -1,4 +1,4 @@
-#!/home/aluno/Documentos/luis/chemistry-data-view/venv/bin/python3
+#!/home/aluno/Documentos/chemistry_dataview/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
