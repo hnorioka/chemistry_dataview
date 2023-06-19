@@ -98,7 +98,7 @@ def deletar_experimento(request):
 
         experimento.delete()
         
-        return redirect()
+        return redirect('dashboard')
     
 def cadastrar_amostra(request):
     if request.method == 'POST':
